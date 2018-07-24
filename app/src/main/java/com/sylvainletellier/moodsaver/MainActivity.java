@@ -1,6 +1,5 @@
 package com.sylvainletellier.moodsaver;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,7 +19,7 @@ public class MainActivity extends FragmentActivity {
         super.setContentView(R.layout.activity_main);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
-        List fragments = new Vector();
+        List<Fragment> fragments = new Vector<>();
 
         // Ajout des Fragments dans la liste
         fragments.add(Fragment.instantiate(this,VeryBadMoodFragment.class.getName()));
@@ -35,7 +34,7 @@ public class MainActivity extends FragmentActivity {
         // Fragments
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        ViewPager pager = (ViewPager) super.findViewById(R.id.viewpager);
+        ViewPager pager = super.findViewById(R.id.viewpager);
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
     }

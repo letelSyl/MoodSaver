@@ -11,7 +11,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     private final List fragments;
 
     //provide to adapter the list of fragments to display
-    public MyPagerAdapter(FragmentManager fm, List fragments) {
+    MyPagerAdapter(FragmentManager fm, List fragments) {
         super(fm);
         this.fragments = fragments;
     }

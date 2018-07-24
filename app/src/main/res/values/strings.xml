@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="very_good_mood">Very good mood</string>
+    <string name="very_bad_mood">Very bad mood</string>
+    <string name="normal_mood">Normal mood</string>
+    <string name="good_mood">Good mood</string>
+    <string name="bad_mood">Bad mood</string>
 </resources>
