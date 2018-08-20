@@ -1,7 +1,13 @@
 package com.sylvainletellier.moodsaver;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+//import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +15,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -24,6 +31,12 @@ public class MainActivity extends FragmentActivity {
     private ViewPager pager;
 
     private SharedPreferences mPreferences;
+
+
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +70,27 @@ public class MainActivity extends FragmentActivity {
         else{
             pager.setCurrentItem(3);
         }
+
+
+
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class) ;
+        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+
+
+        // Set the alarm to start at approximately 00:00 p.m.
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 00);
+
+        // With setInexactRepeating(), you have to use one of the AlarmManager interval
+        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
     }
 
     @Override
@@ -67,4 +101,11 @@ public class MainActivity extends FragmentActivity {
         int moodIndex = pager.getCurrentItem();
         mPreferences.edit().putInt(BUNDLE_STATE_MOOD, moodIndex).apply();
     }
+    private class AlarmReceiver extends BroadcastReceiver{
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+    }
+}
+
 }

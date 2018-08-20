@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoryActivity">
+
+    <TextView
+        android:id="@+id/j-7"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@color/light_sage"
+        android:text="j-7" />
+
+    <TextView
+        android:id="@+id/j-6"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@color/banana_yellow"
+        android:text="j-6"
+         />
+
+    <TextView
+        android:id="@+id/j-5"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@color/warm_grey"
+        android:text="j-5"
+        />
+
+    <TextView
+        android:id="@+id/j-4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@color/cornflower_blue_65"
+        android:text="j-4"
+        />
+
+    <TextView
+        android:id="@+id/j-3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@color/faded_red"
+        android:text="j-3"
+        />
+
+    <TextView
+        android:id="@+id/j-2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@color/light_sage"
+        android:text="j-2"
+        />
+
+    <TextView
+        android:id="@+id/j-1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@color/warm_grey"
+        android:text="j-1"
+        />
+</LinearLayout>
