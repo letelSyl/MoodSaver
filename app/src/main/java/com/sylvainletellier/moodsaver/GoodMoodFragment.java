@@ -26,6 +26,7 @@ public class GoodMoodFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_good_mood, container, false);
 
         // Get reference of widgets from XML layout
+        // FIXME : View inutile
         final FrameLayout fl = v.findViewById(R.id.fl);
 
         mComment = v.findViewById(R.id.good_comment);
@@ -37,6 +38,7 @@ public class GoodMoodFragment extends Fragment {
                 // Build an AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+                // FIXME : Attention tu réutilise le même nom d'une variable du scope parent (variable shadowing)
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.alertdialog_custom_view, null);
 
