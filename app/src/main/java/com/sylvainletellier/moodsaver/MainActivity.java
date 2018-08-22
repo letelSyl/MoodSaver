@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity {
     public static final String BUNDLE_STATE_MOOD = "currentMood";
     private int mMoodIndex;
 
-    public static final String BUNDLE_STATE_COMMENT = "Cemment";
+    public static final String BUNDLE_STATE_COMMENT = "Comment";
 
     private ViewPager pager;
 
