@@ -7,12 +7,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+// FIXME : Supprimer les imports inutiles (raccourci Shift + Alt + L)
 //import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 
 import java.util.Calendar;
@@ -37,7 +39,6 @@ public class MainActivity extends FragmentActivity {
     private PendingIntent alarmIntent;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity {
         List<Fragment> fragments = new Vector<>();
 
         // Ajout des Fragments dans la liste
+        // FIXME : il est possible d'utilister le constructeur des fragments directement. Il est aussi possible d'utiliser Arrays.asList()
         fragments.add(Fragment.instantiate(this,VeryBadMoodFragment.class.getName()));
         fragments.add(Fragment.instantiate(this,BadMoodFragment.class.getName()));
         fragments.add(Fragment.instantiate(this,NormalMoodFragment.class.getName()));
@@ -78,12 +80,12 @@ public class MainActivity extends FragmentActivity {
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
 
-
         // Set the alarm to start at approximately 00:00 p.m.
 
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+        // FIXME : 00 est interpreté comme un octet au lieu d'un integer
         calendar.set(Calendar.HOUR_OF_DAY, 00);
 
         // With setInexactRepeating(), you have to use one of the AlarmManager interval
