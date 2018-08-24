@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/smiley_sad" />
+        android:src="@drawable/smiley_sad" />
 
     <ImageView
         android:id="@+id/very_bad_comment"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="15dp"
-        android:src="@mipmap/ic_note_add_black"
+        android:src="@drawable/ic_note_add_black"
         />
 
     <ImageView
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
-        android:src="@mipmap/ic_history_black"
+        android:src="@drawable/ic_history_black"
         />
 
 </FrameLayout>
