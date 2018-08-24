@@ -7,8 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-// FIXME : Supprimer les imports inutiles (raccourci Shift + Alt + L)
-//import android.icu.util.Calendar;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -85,8 +84,8 @@ public class MainActivity extends FragmentActivity {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        // FIXME : 00 est interpreté comme un octet au lieu d'un integer
-        calendar.set(Calendar.HOUR_OF_DAY, 00);
+        // FIXME : 00 est interpreté comme un octet au lieu d'un integer (changed 00 to 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
 
         // With setInexactRepeating(), you have to use one of the AlarmManager interval
         // constants--in this case, AlarmManager.INTERVAL_DAY.
