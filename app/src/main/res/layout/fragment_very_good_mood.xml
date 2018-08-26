@@ -7,35 +7,33 @@
     android:background="@color/banana_yellow"
     tools:context=".VeryGoodMoodFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/very_good_mood" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/smiley_super_happy" />
+        android:src="@drawable/smiley_super_happy"
+        android:contentDescription="@string/very_good_mood"
+        />
 
     <ImageView
-        android:id="@+id/very_good_comment"
+        android:id="@+id/bad_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="15dp"
         android:src="@drawable/ic_note_add_black"
+        android:contentDescription="@string/comment_icon"
         />
 
     <ImageView
-        android:id="@+id/very_good_history"
+        android:id="@+id/bad_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
         android:src="@drawable/ic_history_black"
-         />
+        android:contentDescription="@string/history_icon"
+        />
 
 </FrameLayout>

@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:background="@color/light_sage"
-        android:text="j-7" />
+        android:text="@string/j_7" />
 
     <TextView
         android:id="@+id/j-6"
@@ -22,7 +22,7 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:background="@color/banana_yellow"
-        android:text="j-6"
+        android:text="@string/j_6"
          />
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:background="@color/warm_grey"
-        android:text="j-5"
+        android:text="@string/j_5"
         />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@color/cornflower_blue_65"
-        android:text="j-4"
+        android:text="@string/j_4"
         />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@color/faded_red"
-        android:text="j-3"
+        android:text="@string/j_3"
         />
 
     <TextView
@@ -62,7 +62,7 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@color/light_sage"
-        android:text="j-2"
+        android:text="@string/j_2"
         />
 
     <TextView
@@ -72,6 +72,6 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:background="@color/warm_grey"
-        android:text="j-1"
+        android:text="@string/j_1"
         />
 </LinearLayout>

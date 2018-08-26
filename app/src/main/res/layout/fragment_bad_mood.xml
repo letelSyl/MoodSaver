@@ -7,18 +7,16 @@
     android:background="@color/warm_grey"
     tools:context=".BadMoodFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/bad_mood" />
+
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/smiley_disappointed" />
+        android:src="@drawable/smiley_disappointed"
+        android:contentDescription="@string/bad_mood"
+        />
 
     <ImageView
         android:id="@+id/bad_comment"
@@ -27,6 +25,7 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="15dp"
         android:src="@drawable/ic_note_add_black"
+        android:contentDescription="@string/comment_icon"
         />
 
     <ImageView
@@ -36,5 +35,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
         android:src="@drawable/ic_history_black"
+        android:contentDescription="@string/history_icon"
         />
 </FrameLayout>

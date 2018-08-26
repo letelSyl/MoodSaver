@@ -7,35 +7,33 @@
     android:background="@color/faded_red"
     tools:context=".VeryBadMoodFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/very_bad_mood" />
-
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/smiley_sad" />
+        android:src="@drawable/smiley_sad"
+        android:contentDescription="@string/very_bad_mood"
+        />
 
     <ImageView
-        android:id="@+id/very_bad_comment"
+        android:id="@+id/bad_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="15dp"
         android:src="@drawable/ic_note_add_black"
+        android:contentDescription="@string/comment_icon"
         />
 
     <ImageView
-        android:id="@+id/very_bad_history"
+        android:id="@+id/bad_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
         android:src="@drawable/ic_history_black"
+        android:contentDescription="@string/history_icon"
         />
 
 </FrameLayout>

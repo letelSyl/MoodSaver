@@ -8,4 +8,17 @@
     <string name="normal_mood">Normal mood</string>
     <string name="good_mood">Good mood</string>
     <string name="bad_mood">Bad mood</string>
+    <string name="comment_icon">comment icon</string>
+    <string name="history_icon">history icon</string>
+    <string name="comment">Comment</string>
+    <string name="your_comment">Your comment.</string>
+    <string name="j_7">j-7</string>
+    <string name="j_6">j-6</string>
+    <string name="j_5">j-5</string>
+    <string name="j_4">j-4</string>
+    <string name="j_3">j-3</string>
+    <string name="j_2">j-2</string>
+    <string name="j_1">j-1</string>
+
+
 </resources>

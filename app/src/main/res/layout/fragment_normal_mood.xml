@@ -6,36 +6,33 @@
     android:background="@color/cornflower_blue_65"
     tools:context=".NormalMoodFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/normal_mood" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/normal_mood"
-        android:src="@drawable/smiley_normal" />
+        android:src="@drawable/smiley_normal"
+        />
 
     <ImageView
-        android:id="@+id/normal_comment"
+        android:id="@+id/bad_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="15dp"
         android:src="@drawable/ic_note_add_black"
+        android:contentDescription="@string/comment_icon"
         />
 
     <ImageView
-        android:id="@+id/normal_history"
+        android:id="@+id/bad_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
         android:src="@drawable/ic_history_black"
+        android:contentDescription="@string/history_icon"
         />
 
 </FrameLayout>

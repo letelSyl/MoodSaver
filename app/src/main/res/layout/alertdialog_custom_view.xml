@@ -12,16 +12,16 @@
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comment."
+        android:text="@string/comment"
         android:padding="5dp"
-        android:textSize="15dp"
+        android:textSize="15sp"
         />
     <EditText
         android:id="@+id/et_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your comment."
-        android:textSize="15dp"
+        android:hint="@string/your_comment"
+        android:textSize="15sp"
         android:layout_below="@id/dialog_title"
         />
 
