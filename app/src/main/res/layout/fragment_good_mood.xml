@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fl"
     android:background="@color/light_sage"
-    tools:context=".GoodMoodFragment">
+    tools:context=".MoodFragment">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -18,7 +18,7 @@
         />
 
     <ImageView
-        android:id="@+id/bad_comment"
+        android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
@@ -28,7 +28,7 @@
         />
 
     <ImageView
-        android:id="@+id/bad_history"
+        android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

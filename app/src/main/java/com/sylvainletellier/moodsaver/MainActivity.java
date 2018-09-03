@@ -3,22 +3,14 @@ package com.sylvainletellier.moodsaver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
-
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 public class MainActivity extends FragmentActivity {
 
@@ -44,15 +36,23 @@ public class MainActivity extends FragmentActivity {
         super.setContentView(R.layout.activity_main);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
-        List<Fragment> fragments = new Vector<>();
+        List<MoodFragment> fragments = Arrays.asList(
+                MoodFragment.newInstance(0),
+                MoodFragment.newInstance(1),
+                MoodFragment.newInstance(2),
+                MoodFragment.newInstance(3),
+                MoodFragment.newInstance(4)
+        );
 
-        // Ajout des Fragments dans la liste
+       /*-- // Ajout des Fragments dans la liste
         // FIXME : il est possible d'utilister le constructeur des fragments directement. Il est aussi possible d'utiliser Arrays.asList()
         fragments.add(Fragment.instantiate(this,VeryBadMoodFragment.class.getName()));
         fragments.add(Fragment.instantiate(this,BadMoodFragment.class.getName()));
         fragments.add(Fragment.instantiate(this,NormalMoodFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this,GoodMoodFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this,VeryGoodMoodFragment.class.getName()));
+        MoodFragment instantiate = new MoodFragment();
+       //instantiate.setMainActivity(this);
+        fragments.add(instantiate);
+        fragments.add(Fragment.instantiate(this,VeryGoodMoodFragment.class.getName())); ---*/
 
 
 
@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity {
 
 
 
+      /*--------------------------------------------------------------------------
         alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class) ;
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
@@ -90,7 +91,7 @@ public class MainActivity extends FragmentActivity {
         // With setInexactRepeating(), you have to use one of the AlarmManager interval
         // constants--in this case, AlarmManager.INTERVAL_DAY.
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, alarmIntent);
-
+    -----------------------------------------------------------------------------------------------*/
 
     }
 
@@ -102,11 +103,15 @@ public class MainActivity extends FragmentActivity {
         int moodIndex = pager.getCurrentItem();
         mPreferences.edit().putInt(BUNDLE_STATE_MOOD, moodIndex).apply();
     }
+   /*--------------------------------------------------------------------
     private class AlarmReceiver extends BroadcastReceiver{
-    @Override
-    public void onReceive(Context context, Intent intent) {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
     }
-}
+    ----------------------------------------------------------------------*/
+
 
 }

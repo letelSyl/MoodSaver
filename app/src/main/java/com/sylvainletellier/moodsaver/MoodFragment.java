@@ -10,26 +10,61 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class GoodMoodFragment extends Fragment {
+public class MoodFragment extends Fragment {
 
     private ImageView mComment;
     private ImageView mHistory;
+   /* private MainActivity mMainActivity;
+
+    public void setMainActivity(MainActivity mainActivity) {
+
+        mMainActivity = mainActivity;
+
+    } */
+
+    public static MoodFragment newInstance(int index) {
+        MoodFragment f = new MoodFragment();
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+        return f;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_good_mood, container, false);
+        int layout = R.layout.fragment_good_mood;
+        int mCurrentMood = 3;
+        if (getArguments() != null) {
+          mCurrentMood = getArguments().getInt("index",3);
+        }
+        switch (mCurrentMood){
+            case 0 :
+                layout = R.layout.fragment_very_bad_mood;
+                break;
+            case 1 :
+                layout = R.layout.fragment_bad_mood;
+                break;
+            case 2 :
+                layout = R.layout.fragment_normal_mood;
+                break;
+            case 3 :
+                layout = R.layout.fragment_good_mood;
+                break;
+            case 4 :
+                layout = R.layout.fragment_very_good_mood;
+                break;
+        }
 
-        // Get reference of widgets from XML layout
 
+        View v = inflater.inflate(layout, container, false);
 
-        mComment = v.findViewById(R.id.good_comment);
-        mHistory = v.findViewById(R.id.good_history);
+        mComment = v.findViewById(R.id.comment);
+        mHistory = v.findViewById(R.id.history);
 
         mComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +117,6 @@ public class GoodMoodFragment extends Fragment {
 
                 // Display the custom alert dialog on interface
                 dialog.show();
-
-                   /*------------- Toast.makeText(getActivity().getApplicationContext(),"test",Toast.LENGTH_SHORT).show();-----------*/
             }
         });
 
@@ -92,16 +125,13 @@ public class GoodMoodFragment extends Fragment {
             public void onClick(View v) {
                 // The user just clicked
                 Intent historyActivity = new Intent(getActivity(), HistoryActivity.class);
-                //startActivity(HistoryActivity);
                 startActivity(historyActivity);
             }
         });
 
-        // Inflate the layout for this fragment
+
         return v;
 
-
-
-
     }
+
 }

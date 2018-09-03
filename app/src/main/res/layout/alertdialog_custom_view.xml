@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".GoodMoodFragment"
+    tools:context=".MoodFragment"
     >
     <TextView
         android:id="@+id/dialog_title"
@@ -32,7 +32,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/et_comment"
         android:layout_marginEnd="108dp"
-        android:text="Save" />
+        android:text="@string/save" />
 
     <Button
         android:id="@+id/dialog_negative_btn"
@@ -40,6 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/dialog_title"
         android:layout_below="@+id/et_comment"
-        android:text="cancel" />
+        android:text="@string/cancel" />
 
 </RelativeLayout>
