@@ -17,13 +17,7 @@ public class MoodFragment extends Fragment {
 
     private ImageView mComment;
     private ImageView mHistory;
-   /* private MainActivity mMainActivity;
 
-    public void setMainActivity(MainActivity mainActivity) {
-
-        mMainActivity = mainActivity;
-
-    } */
 
     public static MoodFragment newInstance(int index) {
         MoodFragment f = new MoodFragment();
@@ -72,7 +66,6 @@ public class MoodFragment extends Fragment {
                 // Build an AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                // FIXME : Attention tu réutilise le même nom d'une variable du scope parent (variable shadowing)
                 LayoutInflater ad_inflater = getLayoutInflater();
                 View dialogView = ad_inflater.inflate(R.layout.alertdialog_custom_view, null);
 
