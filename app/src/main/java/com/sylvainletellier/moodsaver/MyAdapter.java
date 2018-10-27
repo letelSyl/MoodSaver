@@ -1,11 +1,13 @@
 package com.sylvainletellier.moodsaver;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,15 +24,7 @@ import static com.sylvainletellier.moodsaver.R.color.*;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-   /* private final List<Pair<String, String>> moods = Arrays.asList(
-            Pair.create("hier", "La pizza était trop bonne !!!"),
-            Pair.create("avant-hier", "La météo est pourrie"),
-            Pair.create("il y a 3 jours", "RAS"),
-            Pair.create("il y a 4 jours", "Bon film au ciné ce soir"),
-            Pair.create("il y a 5 jours",""),
-            Pair.create("il y a 6 jours", "Beaucoup trop de travail "),
-            Pair.create("il y a une semaine", "La voiture est encore en panne :(")
-    );*/
+
     private Map<Integer, ItemHistory> comments;
 
     public MyAdapter(HashMap<Integer, ItemHistory> comments){
@@ -79,12 +73,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public void display() {
 
-            HashMap<Integer, Integer> bkgColor = new HashMap<>();
-            bkgColor.put(0,itemView.getResources().getColor(color.faded_red));
-            bkgColor.put(1, itemView.getResources().getColor(color.warm_grey));
-            bkgColor.put(2, itemView.getResources().getColor(color.cornflower_blue_65));
-            bkgColor.put(3, itemView.getResources().getColor(color.light_sage));
-            bkgColor.put(4, itemView.getResources().getColor(color.banana_yellow));
+            DisplayMetrics metrics = new DisplayMetrics();
+
+
+            Pair<Integer, Integer> pair = null;
+            HashMap<Integer, Pair<Integer,Integer>> cellParameters = new HashMap<>();
+            cellParameters.put(0, pair.create(itemView.getResources().getColor(color.faded_red),metrics.widthPixels*1/5));
+            cellParameters.put(1, pair.create(itemView.getResources().getColor(color.warm_grey),metrics.widthPixels*2/5));
+            cellParameters.put(2, pair.create(itemView.getResources().getColor(color.cornflower_blue_65),metrics.widthPixels*3/5));
+            cellParameters.put(3, pair.create(itemView.getResources().getColor(color.light_sage),metrics.widthPixels*4/5));
+            cellParameters.put(4, pair.create(itemView.getResources().getColor(color.banana_yellow),metrics.widthPixels));
 
             if (comments.get(getAdapterPosition()).getMoodIndex()!= -1) {
                 comments.get(getAdapterPosition()).getDate();
@@ -95,7 +93,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 }
 
 
-           itemView.setBackgroundColor(bkgColor.get(comments.get(getAdapterPosition()).getMoodIndex()));
+           itemView.setBackgroundColor(cellParameters.get(comments.get(getAdapterPosition()).getMoodIndex()).first);
+           itemView.setLayoutParams(new RelativeLayout.LayoutParams(cellParameters.get(comments.get(getAdapterPosition()).getMoodIndex()).second,metrics.heightPixels*1/7));
 
             }
         }
