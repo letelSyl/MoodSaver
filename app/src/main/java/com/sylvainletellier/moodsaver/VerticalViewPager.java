@@ -3,7 +3,7 @@ package com.sylvainletellier.moodsaver;
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License").
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -72,6 +72,11 @@ public class VerticalViewPager extends ViewPager {
         return ev;
     }
     private static final class VerticalPageTransformer implements ViewPager.PageTransformer {
+
+         //SCROLL_STATE_SETTLING
+
+        // puis rechercher comment jouer un son
+
         @Override
         public void transformPage(View view, float position) {
             final int pageWidth = view.getWidth();

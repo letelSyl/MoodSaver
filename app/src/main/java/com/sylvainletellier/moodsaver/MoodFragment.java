@@ -36,28 +36,29 @@ public class MoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         if (getArguments() != null) {
-          mCurrentMood = getArguments().getInt("index",3);
+            mCurrentMood = getArguments().getInt("index", 3);
         }
-        switch (mCurrentMood){
-            case 0 :
+        switch (mCurrentMood) {
+            case 0:
                 layout = R.layout.fragment_very_bad_mood;
                 break;
-            case 1 :
+            case 1:
                 layout = R.layout.fragment_bad_mood;
                 break;
-            case 2 :
+            case 2:
                 layout = R.layout.fragment_normal_mood;
                 break;
-            case 3 :
+            case 3:
                 layout = R.layout.fragment_good_mood;
                 break;
-            case 4 :
+            case 4:
                 layout = R.layout.fragment_very_good_mood;
                 break;
+            default:
+                layout = R.layout.fragment_good_mood;
+                break;
         }
-
 
         View v = inflater.inflate(layout, container, false);
 
@@ -70,8 +71,8 @@ public class MoodFragment extends Fragment {
                 // Build an AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                LayoutInflater ad_inflater = getLayoutInflater();
-                View dialogView = ad_inflater.inflate(R.layout.alertdialog_custom_view, null);
+                LayoutInflater adInflater = getLayoutInflater();
+                View dialogView = adInflater.inflate(R.layout.alertdialog_custom_view, null);
 
                 // Specify alert dialog is not cancelable/not ignorable
                 builder.setCancelable(false);
@@ -80,35 +81,33 @@ public class MoodFragment extends Fragment {
                 builder.setView(dialogView);
 
                 // Get the custom alert dialog view widgets reference
-                Button btn_positive = dialogView.findViewById(R.id.dialog_positive_btn);
-                Button btn_negative = dialogView.findViewById(R.id.dialog_negative_btn);
-                final EditText et_comment = dialogView.findViewById(R.id.et_comment);
+                Button btnPositive = dialogView.findViewById(R.id.dialog_positive_btn);
+                Button btnNegative = dialogView.findViewById(R.id.dialog_negative_btn);
+                final EditText etComment = dialogView.findViewById(R.id.et_comment);
 
                 // Create the alert dialog
                 final AlertDialog dialog = builder.create();
 
                 // Set positive/yes button click listener
-                btn_positive.setOnClickListener(new View.OnClickListener() {
+                btnPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Dismiss the alert dialog
                         dialog.cancel();
-                        String comment = et_comment.getText().toString();
+                        String comment = etComment.getText().toString();
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Submitted comment : " + comment, Toast.LENGTH_SHORT).show();
-                        SharedPreferences preferences = getActivity().getPreferences(MODE_PRIVATE);
+                        SharedPreferences preferences = getActivity().getBaseContext().getSharedPreferences("monFichier", MODE_PRIVATE);
 
                         preferences.edit().putString(BUNDLE_STATE_CURRENT_COMMENT, comment).apply();
-                        Toast.makeText(getActivity().getApplicationContext(),getActivity().getPreferences(MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT,null ), Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 // Set negative/no button click listener
-                btn_negative.setOnClickListener(new View.OnClickListener() {
+                btnNegative.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Dismiss/cancel the alert dialog
-                        //dialog.cancel();
                         dialog.dismiss();
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Cancel button clicked", Toast.LENGTH_SHORT).show();
@@ -131,7 +130,6 @@ public class MoodFragment extends Fragment {
 
 
         return v;
-
     }
-
 }
+
