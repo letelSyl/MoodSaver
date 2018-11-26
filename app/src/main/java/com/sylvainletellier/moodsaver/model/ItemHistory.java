@@ -22,10 +22,6 @@ public class ItemHistory {
         return comment;
     }
 
-    public void setMoodIndex(int moodIndex) {
-        this.moodIndex = moodIndex;
-    }
-
     public void setDate(String date) {
         this.date = date;
     }

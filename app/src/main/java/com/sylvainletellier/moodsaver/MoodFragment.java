@@ -28,11 +28,6 @@ public class MoodFragment extends Fragment {
     private int layout;
     private int mCurrentMood;
 
-/*-----------------------------------------------------------------------------------*/
-
-
-
-/*-----------------------------------------------------------------------------------*/
 
     public static MoodFragment newInstance(int index) {
         MoodFragment f = new MoodFragment();
@@ -46,12 +41,6 @@ public class MoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-/*------------------------create sondPool-------------------------------------------------*/
-
-
-
-/*----------------------------------------------------------------------------------------*/
 
         if (getArguments() != null) {
             mCurrentMood = getArguments().getInt("index", 3);

@@ -21,7 +21,7 @@ public class DeviceBootReceiver extends BroadcastReceiver {
             // Set the alarm to start at approximately 00:00.
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
-            //00 est interpreté comme un octet au lieu d'un integer (changed 00 to 0)
+            //00 is interpreted as a byte instead of an integer (changed 00 to 0)
             calendar.set(Calendar.HOUR_OF_DAY,0);
             calendar.set(Calendar.MINUTE,0 );
 

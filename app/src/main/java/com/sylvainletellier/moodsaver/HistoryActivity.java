@@ -54,19 +54,6 @@ public class HistoryActivity extends AppCompatActivity {
         comments.put(5,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M6,-1),"Il y a 6 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M6,null )));
         comments.put(6,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M7,-1),"Il y a 1 semaine",mPreferences.getString(BUNDLE_STATE_COMMENT_M7,null )));
 
-       /* final RecyclerView rv = findViewById(R.id.list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MyAdapter(comments,this ));
-        rv.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_UP){
-                    return false;
-                }
-                return true;
-            }
-        });*/
-
         LinearLayout layout = findViewById(R.id.list);
         ItemHistory itemHistory;
 

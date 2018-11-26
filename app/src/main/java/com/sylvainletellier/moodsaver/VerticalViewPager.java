@@ -75,10 +75,6 @@ public class VerticalViewPager extends ViewPager {
 
     private static final class VerticalPageTransformer implements ViewPager.PageTransformer {
 
-
-
-        // puis rechercher comment jouer un son
-
         @Override
         public void transformPage(View view, float position) {
             final int pageWidth = view.getWidth();

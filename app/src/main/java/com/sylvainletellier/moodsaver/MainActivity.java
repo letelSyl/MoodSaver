@@ -16,11 +16,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-
-import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 
 public class MainActivity extends FragmentActivity {
 
@@ -64,7 +63,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
 
-        // Création de la liste de Fragments que fera défiler le PagerAdapter
+        // Creating the list of Fragments that will scroll the PagerAdapter
         List<MoodFragment> fragments = Arrays.asList(
                 MoodFragment.newInstance(0),
                 MoodFragment.newInstance(1),
@@ -96,13 +95,13 @@ public class MainActivity extends FragmentActivity {
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
         pager = super.findViewById(R.id.viewpager);
-        // Affectation de l'adapter au ViewPager
+        // Assignment to adapt it to ViewPager
         pager.setAdapter(this.mPagerAdapter);
 
 
         Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, "Commentaire -1 vide"), Toast.LENGTH_SHORT).show();
         Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, "Commentaire courrant vide"), Toast.LENGTH_SHORT).show();
-        // Création de l'adapter qui s'occupera de l'affichage de la liste de Fragments
+        // Creation of the adapt that will take care of the display of the list of Fragments
 
         mMoodIndex = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
 
@@ -110,9 +109,7 @@ public class MainActivity extends FragmentActivity {
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             private int index;
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
@@ -134,15 +131,14 @@ public class MainActivity extends FragmentActivity {
                     case 4:
                         mSoundPool.play(sound4, 1.0f, 1.0f, 0, 0, 1);
                         break;
+                    default:
+                        //No action neede if there is no scroll
+                        break;
                 }
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
         firstStart = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getBoolean(BUNDLE_STATE_FIRST_START, true);
 
