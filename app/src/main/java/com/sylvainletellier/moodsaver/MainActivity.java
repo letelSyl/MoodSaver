@@ -7,13 +7,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 
 public class MainActivity extends FragmentActivity {
 
@@ -49,6 +56,9 @@ public class MainActivity extends FragmentActivity {
     private boolean firstStart;
     public static final String BUNDLE_STATE_FIRST_START = "first start";
 
+    private SoundPool mSoundPool;
+    private int sound0, sound1, sound2, sound3, sound4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +73,32 @@ public class MainActivity extends FragmentActivity {
                 MoodFragment.newInstance(4)
         );
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+
+            mSoundPool = new SoundPool.Builder()
+                    .setMaxStreams(5)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else {
+            mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        sound0 = mSoundPool.load(this,R.raw.sound0,1 );
+        sound1 = mSoundPool.load(this,R.raw.sound1,1 );
+        sound2 = mSoundPool.load(this,R.raw.sound2,1 );
+        sound3 = mSoundPool.load(this,R.raw.sound3,1 );
+        sound4 = mSoundPool.load(this,R.raw.sound4,1 );
+
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
         pager = super.findViewById(R.id.viewpager);
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
+
 
         Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, "Commentaire -1 vide"), Toast.LENGTH_SHORT).show();
         Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, "Commentaire courrant vide"), Toast.LENGTH_SHORT).show();
@@ -76,7 +107,43 @@ public class MainActivity extends FragmentActivity {
         mMoodIndex = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
 
         pager.setCurrentItem(mMoodIndex);
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            private int index;
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                this.index = position;
+                mSoundPool.autoPause();
+                switch (this.index) {
+                    case 0:
+                        mSoundPool.play(sound0, 1.0f, 1.0f, 0, 0, 1);
+                        break;
+                    case 1:
+                        mSoundPool.play(sound1, 1.0f, 1.0f, 0, 0, 1);
+                        break;
+                    case 2:
+                        mSoundPool.play(sound2, 1.0f, 1.0f, 0, 0, 1);
+                        break;
+                    case 3:
+                        mSoundPool.play(sound3, 1.0f, 1.0f, 0, 0, 1);
+                        break;
+                    case 4:
+                        mSoundPool.play(sound4, 1.0f, 1.0f, 0, 0, 1);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+
+
+            }
+        });
         firstStart = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getBoolean(BUNDLE_STATE_FIRST_START, true);
 
         if(firstStart) {

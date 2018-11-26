@@ -71,9 +71,11 @@ public class VerticalViewPager extends ViewPager {
         ev.setLocation(x, y);
         return ev;
     }
+
+
     private static final class VerticalPageTransformer implements ViewPager.PageTransformer {
 
-         //SCROLL_STATE_SETTLING
+
 
         // puis rechercher comment jouer un son
 

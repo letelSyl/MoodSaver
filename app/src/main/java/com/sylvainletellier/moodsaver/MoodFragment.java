@@ -4,6 +4,10 @@ package com.sylvainletellier.moodsaver;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +28,12 @@ public class MoodFragment extends Fragment {
     private int layout;
     private int mCurrentMood;
 
+/*-----------------------------------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------------------*/
+
     public static MoodFragment newInstance(int index) {
         MoodFragment f = new MoodFragment();
         Bundle args = new Bundle();
@@ -35,6 +45,13 @@ public class MoodFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+/*------------------------create sondPool-------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------------*/
 
         if (getArguments() != null) {
             mCurrentMood = getArguments().getInt("index", 3);
@@ -131,5 +148,6 @@ public class MoodFragment extends Fragment {
 
         return v;
     }
+
 }
 
