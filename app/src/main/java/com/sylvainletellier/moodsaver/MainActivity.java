@@ -92,6 +92,8 @@ public class MainActivity extends FragmentActivity {
         sound3 = mSoundPool.load(this,R.raw.sound3,1 );
         sound4 = mSoundPool.load(this,R.raw.sound4,1 );
 
+
+
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
         pager = super.findViewById(R.id.viewpager);
@@ -114,32 +116,16 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onPageSelected(int position) {
                 this.index = position;
+                int[]sounds = {sound0, sound1, sound2, sound3, sound4};
                 mSoundPool.autoPause();
-                switch (this.index) {
-                    case 0:
-                        mSoundPool.play(sound0, 1.0f, 1.0f, 0, 0, 1);
-                        break;
-                    case 1:
-                        mSoundPool.play(sound1, 1.0f, 1.0f, 0, 0, 1);
-                        break;
-                    case 2:
-                        mSoundPool.play(sound2, 1.0f, 1.0f, 0, 0, 1);
-                        break;
-                    case 3:
-                        mSoundPool.play(sound3, 1.0f, 1.0f, 0, 0, 1);
-                        break;
-                    case 4:
-                        mSoundPool.play(sound4, 1.0f, 1.0f, 0, 0, 1);
-                        break;
-                    default:
-                        //No action neede if there is no scroll
-                        break;
-                }
+                mSoundPool.play(sounds[this.index], 1.0f, 1.0f, 0, 0, 1);
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
+
         firstStart = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getBoolean(BUNDLE_STATE_FIRST_START, true);
 
         if(firstStart) {
