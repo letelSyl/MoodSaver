@@ -30,40 +30,42 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private  String mCurrentComment, mCommentM1, mCommentM2, mCommentM3, mCommentM4, mCommentM5, mCommentM6, mCommentM7;
 
+
     @Override
     public void onReceive(Context context, Intent alarm) {
 
         fillHistory(context);
 
-        Intent mainActivity = new Intent(context, MainActivity.class);
-        context.startActivity(mainActivity);
+      /*  Intent mainActivity = new Intent(context, MainActivity.class);
+        context.startActivity(mainActivity);*/
     }
 
     public void beforeFieldHistory(Context context){
-        mMoodIndex =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
-        mMoodIndexM1 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M1,-1 );
-        mMoodIndexM2 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M2,-1 );
-        mMoodIndexM3 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M3,-1 );
-        mMoodIndexM4 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M4,-1 );
-        mMoodIndexM5 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M5,-1 );
-        mMoodIndexM6 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M6,-1 );
-        mMoodIndexM7 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD_M7,-1 );
+        SharedPreferences mPreferences = PreferencesUtil.get(context);
+        mMoodIndex =  mPreferences.getInt(BUNDLE_STATE_MOOD, 3);
+        mMoodIndexM1 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M1,-1 );
+        mMoodIndexM2 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M2,-1 );
+        mMoodIndexM3 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M3,-1 );
+        mMoodIndexM4 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M4,-1 );
+        mMoodIndexM5 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M5,-1 );
+        mMoodIndexM6 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M6,-1 );
+        mMoodIndexM7 =  mPreferences.getInt(BUNDLE_STATE_MOOD_M7,-1 );
 
-        mCurrentComment = context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, null);
-        mCommentM1 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, null);
-        mCommentM2 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M2, null);
-        mCommentM3 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M3, null);
-        mCommentM4 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M4, null);
-        mCommentM5 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M5, null);
-        mCommentM6 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M6, null);
-        mCommentM7 =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M7, null);
+        mCurrentComment = mPreferences.getString(BUNDLE_STATE_CURRENT_COMMENT, null);
+        mCommentM1 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M1, null);
+        mCommentM2 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M2, null);
+        mCommentM3 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M3, null);
+        mCommentM4 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M4, null);
+        mCommentM5 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M5, null);
+        mCommentM6 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M6, null);
+        mCommentM7 =  mPreferences.getString(BUNDLE_STATE_COMMENT_M7, null);
 
     }
 
     public void fillHistory(Context context){
-
-        SharedPreferences.Editor mPreferences =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).edit();
-        int mNbrDaysHistory =  context.getSharedPreferences(MainActivity.MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_NBR_HISTORY,1 );
+        SharedPreferences mGetPreferences = PreferencesUtil.get(context);
+        SharedPreferences.Editor mSetPreferences = PreferencesUtil.set(context);
+        int mNbrDaysHistory =  mGetPreferences.getInt(BUNDLE_STATE_NBR_HISTORY,1 );
         beforeFieldHistory(context);
 
         int[] moodIndexTable = {mMoodIndex, mMoodIndexM1, mMoodIndexM2, mMoodIndexM3, mMoodIndexM4, mMoodIndexM5, mMoodIndexM6, mMoodIndexM7};
@@ -75,18 +77,18 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         for (int i=mNbrDaysHistory; i>0; i--){
 
-            mPreferences.putInt(moodKeyTable[i],moodIndexTable[i-1]);
+            mSetPreferences.putInt(moodKeyTable[i],moodIndexTable[i-1]);
 
-            mPreferences.putString(commentKeyTable[i],commentTable[i-1]);
+            mSetPreferences.putString(commentKeyTable[i],commentTable[i-1]);
         }
         if (mNbrDaysHistory < 7) {
             mNbrDaysHistory = mNbrDaysHistory + 1;
-            mPreferences.putInt(BUNDLE_STATE_NBR_HISTORY, mNbrDaysHistory);
+            mSetPreferences.putInt(BUNDLE_STATE_NBR_HISTORY, mNbrDaysHistory);
         }
 
-        mPreferences.putInt(BUNDLE_STATE_MOOD,3 );
-        mPreferences.putString(BUNDLE_STATE_CURRENT_COMMENT, null);
+        mSetPreferences.putInt(BUNDLE_STATE_MOOD,3 );
+        mSetPreferences.putString(BUNDLE_STATE_CURRENT_COMMENT, null);
 
-        mPreferences.apply();
+        mSetPreferences.apply();
     }
 }

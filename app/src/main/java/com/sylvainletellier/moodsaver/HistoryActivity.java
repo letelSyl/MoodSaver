@@ -18,7 +18,6 @@ import com.sylvainletellier.moodsaver.model.ItemHistory;
 
 import java.util.HashMap;
 
-import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M1;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M2;
@@ -42,7 +41,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-       SharedPreferences mPreferences = this.getSharedPreferences("monFichier", MODE_PRIVATE);
+       SharedPreferences mPreferences = PreferencesUtil.get(this);
 
         HashMap<Integer, ItemHistory> comments = new HashMap<>();
 
@@ -85,7 +84,6 @@ public class HistoryActivity extends AppCompatActivity {
                date = (child.findViewById(R.id.date));
                comment = (child.findViewById(R.id.comment_icon));
 
-               comment.setVisibility(INVISIBLE);
                date.setText(itemHistory.getDate());
                child.setBackgroundColor(cellParameters.get(itemHistory.getMoodIndex()).first);
                child.setLayoutParams(new RelativeLayout.LayoutParams(cellParameters.get(itemHistory.getMoodIndex()).second, metrics.heightPixels / 7));
