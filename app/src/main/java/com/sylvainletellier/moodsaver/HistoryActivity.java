@@ -1,7 +1,6 @@
 package com.sylvainletellier.moodsaver;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -41,17 +40,16 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-       SharedPreferences mPreferences = PreferencesUtil.get(this);
 
         HashMap<Integer, ItemHistory> comments = new HashMap<>();
 
-        comments.put(0,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M1,-1),"hier",mPreferences.getString(BUNDLE_STATE_COMMENT_M1,null )));
-        comments.put(1,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M2,-1),"Il y a 2 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M2,null )));
-        comments.put(2,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M3,-1),"Il y a 3 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M3,null )));
-        comments.put(3,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M4,-1),"Il y a 4 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M4,null )));
-        comments.put(4,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M5,-1),"Il y a 5 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M5,null )));
-        comments.put(5,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M6,-1),"Il y a 6 jours",mPreferences.getString(BUNDLE_STATE_COMMENT_M6,null )));
-        comments.put(6,new ItemHistory(mPreferences.getInt(BUNDLE_STATE_MOOD_M7,-1),"Il y a 1 semaine",mPreferences.getString(BUNDLE_STATE_COMMENT_M7,null )));
+        comments.put(0,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M1,-1),"hier",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M1,null )));
+        comments.put(1,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M2,-1),"Il y a 2 jours",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M2,null )));
+        comments.put(2,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M3,-1),"Il y a 3 jours",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M3,null )));
+        comments.put(3,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M4,-1),"Il y a 4 jours",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M4,null )));
+        comments.put(4,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M5,-1),"Il y a 5 jours",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M5,null )));
+        comments.put(5,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M6,-1),"Il y a 6 jours",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M6,null )));
+        comments.put(6,new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M7,-1),"Il y a 1 semaine",PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M7,null )));
 
         LinearLayout layout = findViewById(R.id.list);
         ItemHistory itemHistory;

@@ -2,7 +2,6 @@ package com.sylvainletellier.moodsaver;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -44,10 +43,7 @@ public class MainActivity extends FragmentActivity {
 
     private VerticalViewPager pager;
 
-    private SharedPreferences.Editor mPreferences = PreferencesUtil.set(this);
 
-
-    //private PendingIntent pendingIntent;
 
     private boolean firstStart;
     public static final String BUNDLE_STATE_FIRST_START = "first start";
@@ -139,7 +135,7 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(this, "first set alarm", Toast.LENGTH_SHORT).show();
 
 
-            mPreferences.putBoolean(BUNDLE_STATE_FIRST_START, false).apply();
+            PreferencesUtil.set(this).putBoolean(BUNDLE_STATE_FIRST_START, false).apply();
         }
     }
 
@@ -149,6 +145,6 @@ public class MainActivity extends FragmentActivity {
 
 
         int moodIndex = pager.getCurrentItem();
-        mPreferences.putInt(BUNDLE_STATE_MOOD, moodIndex).apply();
+        PreferencesUtil.set(this).putInt(BUNDLE_STATE_MOOD, moodIndex).apply();
     }
 }
