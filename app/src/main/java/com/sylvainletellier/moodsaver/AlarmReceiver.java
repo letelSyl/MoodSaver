@@ -37,7 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     }
 
-    public void beforeFieldHistory(Context context){
+    private void beforeFieldHistory(Context context){
         mMoodIndex =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_MOOD, 3);
         mMoodIndexM1 =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_MOOD_M1,-1 );
         mMoodIndexM2 =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_MOOD_M2,-1 );
@@ -58,7 +58,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     }
 
-    public void fillHistory(Context context){
+    private void fillHistory(Context context){
         int mNbrDaysHistory =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_NBR_HISTORY,1 );
         beforeFieldHistory(context);
 

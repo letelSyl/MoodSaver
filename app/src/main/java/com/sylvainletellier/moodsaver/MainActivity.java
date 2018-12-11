@@ -132,7 +132,7 @@ public class MainActivity extends FragmentActivity {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
 
-            Toast.makeText(this, "first set alarm", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "first set alarm", Toast.LENGTH_SHORT).show();
 
 
             PreferencesUtil.set(this).putBoolean(BUNDLE_STATE_FIRST_START, false).apply();
