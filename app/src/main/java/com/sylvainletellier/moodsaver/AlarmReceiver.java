@@ -3,7 +3,7 @@ package com.sylvainletellier.moodsaver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+/*
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M1;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M2;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M3;
@@ -20,23 +20,26 @@ import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M4;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M5;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M6;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M7;
-
+*/
 public class AlarmReceiver extends BroadcastReceiver {
 
-    public static final String BUNDLE_STATE_NBR_HISTORY = "Number of days in history";
+/*    public static final String BUNDLE_STATE_NBR_HISTORY = "Number of days in history";
 
     private  int mMoodIndex, mMoodIndexM1, mMoodIndexM2, mMoodIndexM3, mMoodIndexM4, mMoodIndexM5, mMoodIndexM6, mMoodIndexM7 ;
 
     private  String mCurrentComment, mCommentM1, mCommentM2, mCommentM3, mCommentM4, mCommentM5, mCommentM6, mCommentM7;
-
+*/
 
     @Override
     public void onReceive(Context context, Intent alarm) {
 
-        fillHistory(context);
+        PreferencesUtil2 preferences = new PreferencesUtil2(context);
+
+        preferences.saveMoodStateHistory();
+        preferences.initializeCurrentMood();
 
     }
-
+/*
     private void beforeFieldHistory(Context context){
         mMoodIndex =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_MOOD, 3);
         mMoodIndexM1 =  PreferencesUtil.get(context).getInt(BUNDLE_STATE_MOOD_M1,-1 );
@@ -68,6 +71,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         String[] commentTable  = {mCurrentComment, mCommentM1, mCommentM2, mCommentM3, mCommentM4, mCommentM5, mCommentM6, mCommentM7};
         String[] commentKeyTable = {BUNDLE_STATE_CURRENT_COMMENT, BUNDLE_STATE_COMMENT_M1, BUNDLE_STATE_COMMENT_M2, BUNDLE_STATE_COMMENT_M3, BUNDLE_STATE_COMMENT_M4, BUNDLE_STATE_COMMENT_M5, BUNDLE_STATE_COMMENT_M6, BUNDLE_STATE_COMMENT_M7};
+/*---------------------------
+Fonction dans preferences util
 
         for (int i=mNbrDaysHistory; i>0; i--){
 
@@ -84,5 +89,5 @@ public class AlarmReceiver extends BroadcastReceiver {
         PreferencesUtil.set(context).putString(BUNDLE_STATE_CURRENT_COMMENT, null);
 
         PreferencesUtil.set(context).apply();
-    }
+    }*/
 }

@@ -15,9 +15,12 @@ import android.widget.Toast;
 
 import com.sylvainletellier.moodsaver.model.ItemHistory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.view.View.VISIBLE;
+/*
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M1;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M2;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_COMMENT_M3;
@@ -32,16 +35,21 @@ import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M4;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M5;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M6;
 import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_MOOD_M7;
+*/
 
 public class HistoryActivity extends AppCompatActivity {
 
     private ItemHistory itemHistory;
 
-    private HashMap<Integer, ItemHistory> comments = new HashMap<>();
+    private HashMap<Integer, ItemHistory> comments;
 
-    private HashMap<Integer, Pair<Integer, Integer>> cellParameters = new HashMap<>();
+    private HashMap<Integer, Pair<Integer, Integer>> cellParameters;
 
-    private DisplayMetrics metrics = new DisplayMetrics();
+    private DisplayMetrics metrics;
+
+    private PreferencesUtil2 mPreferences;
+
+    private List<PreferencesUtil2.MoodState> MoodStates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +57,35 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         LinearLayout layout = findViewById(R.id.list);
+
+
+        mPreferences = new PreferencesUtil2(this);
+        MoodStates = mPreferences.getAllMoodState();
         display(layout);
-
-
     }
 
     private void beforeDisplay() {
+        comments = new HashMap<>();
 
 
-        comments.put(0, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M1, -1), "hier", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M1, null)));
-        comments.put(1, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M2, -1), "Il y a 2 jours", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M2, null)));
-        comments.put(2, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M3, -1), "Il y a 3 jours", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M3, null)));
-        comments.put(3, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M4, -1), "Il y a 4 jours", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M4, null)));
-        comments.put(4, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M5, -1), "Il y a 5 jours", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M5, null)));
-        comments.put(5, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M6, -1), "Il y a 6 jours", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M6, null)));
-        comments.put(6, new ItemHistory(PreferencesUtil.get(this).getInt(BUNDLE_STATE_MOOD_M7, -1), "Il y a 1 semaine", PreferencesUtil.get(this).getString(BUNDLE_STATE_COMMENT_M7, null)));
+
+        comments.put(0, new ItemHistory(MoodStates.get(0).getMood(),
+                "hier", MoodStates.get(0).getComment()));
+        comments.put(1, new ItemHistory(MoodStates.get(1).getMood(),
+                "Avant-hier", MoodStates.get(1).getComment()));
+        comments.put(2, new ItemHistory(MoodStates.get(2).getMood(),
+                "Il y a 3 jours", MoodStates.get(2).getComment()));
+        comments.put(3, new ItemHistory(MoodStates.get(3).getMood(),
+                "Il y a 4 jours", MoodStates.get(3).getComment()));
+        comments.put(4, new ItemHistory(MoodStates.get(4).getMood(),
+                "Il y a 5 jours", MoodStates.get(4).getComment()));
+        comments.put(5, new ItemHistory(MoodStates.get(5).getMood(),
+                "Il y a 6 jours",  MoodStates.get(5).getComment()));
+        comments.put(6, new ItemHistory(MoodStates.get(6).getMood(),
+                "Il y a 1 semaine", MoodStates.get(6).getComment()));
+
+        cellParameters = new HashMap<>();
+        metrics = new DisplayMetrics();
 
         WindowManager windowManager = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -82,14 +104,14 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void display(LinearLayout layout) {
         beforeDisplay();
-        for (int i = comments.size(); i > 0; i--) {
+        for (int i = comments.size()-1; i >= 0; i--) {
             View child = getLayoutInflater().inflate(R.layout.history_cell, null);
+            itemHistory = comments.get(i);
+
+            if (comments.get(i).getMoodIndex() != -1) {
 
 
-            if (comments.get(i - 1).getMoodIndex() != -1) {
 
-                itemHistory = comments.get(i - 1);
-                final String msg = itemHistory.getComment();
                 TextView date;
                 ImageView comment;
                 date = (child.findViewById(R.id.date));
@@ -99,7 +121,8 @@ public class HistoryActivity extends AppCompatActivity {
                 child.setBackgroundColor(cellParameters.get(itemHistory.getMoodIndex()).first);
                 child.setLayoutParams(new RelativeLayout.LayoutParams(cellParameters.get(itemHistory.getMoodIndex()).second, metrics.heightPixels / 7));
 
-                if (comments.get(i - 1).getComment() != null) {
+                if (comments.get(i).getComment() != "") {
+                    final String msg = itemHistory.getComment();
                     comment.setVisibility(VISIBLE);
                     comment.setOnClickListener(new View.OnClickListener() {
                         @Override

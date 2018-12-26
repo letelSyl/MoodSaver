@@ -1,7 +1,6 @@
 package com.sylvainletellier.moodsaver;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -19,9 +18,10 @@ import java.util.List;
 public class MainActivity extends FragmentActivity {
 
     public static final String MON_FICHIER = "monFichier";
+
     private PagerAdapter mPagerAdapter;
 
-    public static final String BUNDLE_STATE_MOOD = "current Mood";
+  /*  public static final String BUNDLE_STATE_MOOD = "current Mood";
     public static final String BUNDLE_STATE_MOOD_M1 = "Mood J-1";
     public static final String BUNDLE_STATE_MOOD_M2 = "Mood J-2";
     public static final String BUNDLE_STATE_MOOD_M3 = "Mood J-3";
@@ -40,10 +40,10 @@ public class MainActivity extends FragmentActivity {
     public static final String BUNDLE_STATE_COMMENT_M5 = "Comment J-5";
     public static final String BUNDLE_STATE_COMMENT_M6 = "Comment J-6";
     public static final String BUNDLE_STATE_COMMENT_M7 = "Comment J-7";
-
+*/
     private VerticalViewPager pager;
 
-
+    private PreferencesUtil2 preferences;
 
     private boolean firstStart;
     public static final String BUNDLE_STATE_FIRST_START = "first start";
@@ -85,7 +85,7 @@ public class MainActivity extends FragmentActivity {
         sound3 = mSoundPool.load(this,R.raw.sound3,1 );
         sound4 = mSoundPool.load(this,R.raw.sound4,1 );
 
-
+        preferences = new PreferencesUtil2(this);
 
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
@@ -94,13 +94,23 @@ public class MainActivity extends FragmentActivity {
         pager.setAdapter(this.mPagerAdapter);
 
 
-        Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, "Commentaire -1 vide"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, "Commentaire courrant vide"), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, "Commentaire -1 vide"), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, "Commentaire courrant vide"), Toast.LENGTH_SHORT).show();
         // Creation of the adapt that will take care of the display of the list of Fragments
 
-        mMoodIndex = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
+      //  mMoodIndex = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
 
-        pager.setCurrentItem(mMoodIndex);
+
+
+
+
+        pager.setCurrentItem(preferences.getMoodState(PreferencesUtil2.BUNDLE_STATE_MOOD).getMood());
+
+
+
+        /*-----------------------------------------
+        Class qui extends ViewPager gestion listener et soundpool
+         */
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int index;
             @Override
@@ -119,7 +129,7 @@ public class MainActivity extends FragmentActivity {
             public void onPageScrollStateChanged(int state) {}
         });
 
-        firstStart = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getBoolean(BUNDLE_STATE_FIRST_START, true);
+        firstStart = preferences.getFirstStart();
 
         if(firstStart) {
 
@@ -132,10 +142,11 @@ public class MainActivity extends FragmentActivity {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
 
-            Toast.makeText(getApplicationContext(), "first set alarm", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "first set alarm", Toast.LENGTH_SHORT).show();
 
+            pager.setCurrentItem(3);
 
-            PreferencesUtil.set(this).putBoolean(BUNDLE_STATE_FIRST_START, false).apply();
+            preferences.setFirstStart(false);
         }
     }
 
@@ -143,8 +154,8 @@ public class MainActivity extends FragmentActivity {
     protected void onPause() {
         super.onPause();
 
-
-        int moodIndex = pager.getCurrentItem();
-        PreferencesUtil.set(this).putInt(BUNDLE_STATE_MOOD, moodIndex).apply();
+    preferences.setMoodState(PreferencesUtil2.BUNDLE_STATE_MOOD, new PreferencesUtil2.MoodState(pager.getCurrentItem(),PreferencesUtil2.BUNDLE_STATE_MOOD.second));
+     /*   int moodIndex = pager.getCurrentItem();
+        PreferencesUtil.set(this).putInt(BUNDLE_STATE_MOOD, moodIndex).apply();*/
     }
 }
