@@ -21,32 +21,11 @@ public class MainActivity extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
 
-  /*  public static final String BUNDLE_STATE_MOOD = "current Mood";
-    public static final String BUNDLE_STATE_MOOD_M1 = "Mood J-1";
-    public static final String BUNDLE_STATE_MOOD_M2 = "Mood J-2";
-    public static final String BUNDLE_STATE_MOOD_M3 = "Mood J-3";
-    public static final String BUNDLE_STATE_MOOD_M4 = "Mood J-4";
-    public static final String BUNDLE_STATE_MOOD_M5 = "Mood J-5";
-    public static final String BUNDLE_STATE_MOOD_M6 = "Mood J-6";
-    public static final String BUNDLE_STATE_MOOD_M7 = "Mood J-7";
-
-    private int mMoodIndex;
-
-    public static final String BUNDLE_STATE_CURRENT_COMMENT = "Current Comment";
-    public static final String BUNDLE_STATE_COMMENT_M1 = "Comment J-1";
-    public static final String BUNDLE_STATE_COMMENT_M2 = "Comment J-2";
-    public static final String BUNDLE_STATE_COMMENT_M3 = "Comment J-3";
-    public static final String BUNDLE_STATE_COMMENT_M4 = "Comment J-4";
-    public static final String BUNDLE_STATE_COMMENT_M5 = "Comment J-5";
-    public static final String BUNDLE_STATE_COMMENT_M6 = "Comment J-6";
-    public static final String BUNDLE_STATE_COMMENT_M7 = "Comment J-7";
-*/
     private VerticalViewPager pager;
 
-    private PreferencesUtil2 preferences;
+    private PreferencesUtil preferences;
 
     private boolean firstStart;
-    public static final String BUNDLE_STATE_FIRST_START = "first start";
 
     private SoundPool mSoundPool;
     private int sound0, sound1, sound2, sound3, sound4;
@@ -65,27 +44,9 @@ public class MainActivity extends FragmentActivity {
                 MoodFragment.newInstance(4)
         );
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
+        soundPoolGenerator();
 
-            mSoundPool = new SoundPool.Builder()
-                    .setMaxStreams(5)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else {
-            mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        }
-
-        sound0 = mSoundPool.load(this,R.raw.sound0,1 );
-        sound1 = mSoundPool.load(this,R.raw.sound1,1 );
-        sound2 = mSoundPool.load(this,R.raw.sound2,1 );
-        sound3 = mSoundPool.load(this,R.raw.sound3,1 );
-        sound4 = mSoundPool.load(this,R.raw.sound4,1 );
-
-        preferences = new PreferencesUtil2(this);
+        preferences = new PreferencesUtil(this);
 
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
@@ -93,24 +54,8 @@ public class MainActivity extends FragmentActivity {
         // Assignment to adapt it to ViewPager
         pager.setAdapter(this.mPagerAdapter);
 
+        pager.setCurrentItem(preferences.getMoodState(PreferencesUtil.BUNDLE_STATE_MOOD).getMood());
 
-      //  Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_COMMENT_M1, "Commentaire -1 vide"), Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(this, getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getString(BUNDLE_STATE_CURRENT_COMMENT, "Commentaire courrant vide"), Toast.LENGTH_SHORT).show();
-        // Creation of the adapt that will take care of the display of the list of Fragments
-
-      //  mMoodIndex = this.getSharedPreferences(MON_FICHIER, Context.MODE_PRIVATE).getInt(BUNDLE_STATE_MOOD, 3);
-
-
-
-
-
-        pager.setCurrentItem(preferences.getMoodState(PreferencesUtil2.BUNDLE_STATE_MOOD).getMood());
-
-
-
-        /*-----------------------------------------
-        Class qui extends ViewPager gestion listener et soundpool
-         */
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int index;
             @Override
@@ -122,7 +67,7 @@ public class MainActivity extends FragmentActivity {
                 int[]sounds = {sound0, sound1, sound2, sound3, sound4};
                 mSoundPool.autoPause();
                 mSoundPool.play(sounds[this.index], 1.0f, 1.0f, 0, 0, 1);
-
+                preferences.setMoodState(PreferencesUtil.BUNDLE_STATE_MOOD, new PreferencesUtil.MoodState(this.index,PreferencesUtil.BUNDLE_STATE_MOOD.second));
             }
 
             @Override
@@ -150,12 +95,25 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    public void soundPoolGenerator(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
 
-    preferences.setMoodState(PreferencesUtil2.BUNDLE_STATE_MOOD, new PreferencesUtil2.MoodState(pager.getCurrentItem(),PreferencesUtil2.BUNDLE_STATE_MOOD.second));
-     /*   int moodIndex = pager.getCurrentItem();
-        PreferencesUtil.set(this).putInt(BUNDLE_STATE_MOOD, moodIndex).apply();*/
+            mSoundPool = new SoundPool.Builder()
+                    .setMaxStreams(5)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else {
+            mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        sound0 = mSoundPool.load(this,R.raw.sound0,1 );
+        sound1 = mSoundPool.load(this,R.raw.sound1,1 );
+        sound2 = mSoundPool.load(this,R.raw.sound2,1 );
+        sound3 = mSoundPool.load(this,R.raw.sound3,1 );
+        sound4 = mSoundPool.load(this,R.raw.sound4,1 );
     }
 }

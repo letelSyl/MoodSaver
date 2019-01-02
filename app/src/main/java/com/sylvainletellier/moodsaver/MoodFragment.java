@@ -3,7 +3,6 @@ package com.sylvainletellier.moodsaver;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,9 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import static android.content.Context.MODE_PRIVATE;
 //import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_CURRENT_COMMENT;
-import static com.sylvainletellier.moodsaver.PreferencesUtil2.BUNDLE_STATE_MOOD;
+
 
 public class MoodFragment extends Fragment {
 
@@ -100,13 +98,9 @@ public class MoodFragment extends Fragment {
                         String comment = etComment.getText().toString();
                         Toast.makeText(getActivity().getApplicationContext(),
                                 "Submitted comment : " + comment, Toast.LENGTH_SHORT).show();
-                        /*SharedPreferences preferences = getActivity().getBaseContext().getSharedPreferences("monFichier", MODE_PRIVATE);
 
-                        preferences.edit().putString(BUNDLE_STATE_CURRENT_COMMENT, comment).apply();
-                        */
-
-                        PreferencesUtil2 preferences = new PreferencesUtil2(getActivity().getBaseContext());
-                        preferences.getMoodState(BUNDLE_STATE_MOOD).setComment(comment);
+                        PreferencesUtil preferences = new PreferencesUtil(getActivity().getBaseContext());
+                        preferences.setMoodState(PreferencesUtil.BUNDLE_STATE_MOOD, new PreferencesUtil.MoodState(mCurrentMood,comment));
                     }
                 });
 
