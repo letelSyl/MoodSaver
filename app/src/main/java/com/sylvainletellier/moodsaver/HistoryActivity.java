@@ -8,6 +8,7 @@ import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,13 +35,16 @@ public class HistoryActivity extends AppCompatActivity {
 
     private List<PreferencesUtil.MoodState> MoodStates;
 
+    private LinearLayout layout;
+
+    private View child;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        RelativeLayout layout = findViewById(R.id.list);
-
+        layout = findViewById(R.id.list);
 
         display(layout);
     }
@@ -84,10 +88,11 @@ public class HistoryActivity extends AppCompatActivity {
         cellParameters.put(4, pair.create(getResources().getColor(R.color.banana_yellow), metrics.widthPixels));
     }
 
-    private void display(RelativeLayout layout) {
+    private void display(LinearLayout layout) {
         beforeDisplay();
         for (int i = comments.size()-1; i >= 0; i--) {
-            View child = getLayoutInflater().inflate(R.layout.history_cell, layout, false);
+
+            child = getLayoutInflater().inflate(R.layout.history_cell, layout, false);
             itemHistory = comments.get(i);
 
             if (itemHistory.getMoodIndex() != -1) {
@@ -101,7 +106,7 @@ public class HistoryActivity extends AppCompatActivity {
                 child.setBackgroundColor(cellParameters.get(itemHistory.getMoodIndex()).first);
                 child.setLayoutParams(new RelativeLayout.LayoutParams(cellParameters.get(itemHistory.getMoodIndex()).second, metrics.heightPixels / 7));
 
-                if (itemHistory.getComment() != "") {
+                if (itemHistory.getComment() != "" || itemHistory.getComment() != "current comment") {
                     final String msg = itemHistory.getComment();
                     comment.setVisibility(VISIBLE);
                     comment.setOnClickListener(new View.OnClickListener() {
