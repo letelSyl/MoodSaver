@@ -74,15 +74,7 @@ public class PreferencesUtil {
     }
 
     public List<MoodState> getAllMoodState() {
-       /* List<Pair<String, String>> moodKeys = Arrays.asList(BUNDLE_STATE_MOOD,
-                BUNDLE_STATE_MOOD_M1,
-                BUNDLE_STATE_MOOD_M2,
-                BUNDLE_STATE_MOOD_M3,
-                BUNDLE_STATE_MOOD_M4,
-                BUNDLE_STATE_MOOD_M5,
-                BUNDLE_STATE_MOOD_M6,
-                BUNDLE_STATE_MOOD_M7);
-*/
+
         ArrayList<MoodState> result = new ArrayList<>();
 
         for (Pair<String, String> moodKey : moodKeys) {
@@ -93,35 +85,13 @@ public class PreferencesUtil {
     }
 
     public void saveMoodStateHistory(){
-       /* List<Pair<String, String>> moodKeys = Arrays.asList(BUNDLE_STATE_MOOD,
-                BUNDLE_STATE_MOOD_M1,
-                BUNDLE_STATE_MOOD_M2,
-                BUNDLE_STATE_MOOD_M3,
-                BUNDLE_STATE_MOOD_M4,
-                BUNDLE_STATE_MOOD_M5,
-                BUNDLE_STATE_MOOD_M6,
-                BUNDLE_STATE_MOOD_M7);
 
-        ArrayList<MoodState> result = new ArrayList<>();
-
-        for (Pair<String, String> moodKey : moodKeys) {
-            result.add(getMoodState(moodKey));
-
-
-        }
- */
         List<MoodState> moodStateList = getAllMoodState();
 
         for (int i = moodKeys.size()-1; i>0; i--){
 
             setMoodState(moodKeys.get(i), moodStateList.get(i-1));
 
-           /* SharedPreferences.Editor edit = mPreferences.edit();
-
-            edit.putInt(moodKeys.get(i).first, result.get(i-1).getMood());
-            edit.putString(moodKeys.get(i).second, result.get(i-1).getComment());
-
-            edit.apply();*/
         }
     }
 

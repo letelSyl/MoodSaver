@@ -13,9 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-//import static com.sylvainletellier.moodsaver.MainActivity.BUNDLE_STATE_CURRENT_COMMENT;
-
-
 public class MoodFragment extends Fragment {
 
     private ImageView mComment;
