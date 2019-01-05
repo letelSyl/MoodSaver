@@ -92,11 +92,11 @@ public class HistoryActivity extends AppCompatActivity {
         beforeDisplay();
         for (int i = comments.size()-1; i >= 0; i--) {
 
-            child = getLayoutInflater().inflate(R.layout.history_cell, layout, false);
+
             itemHistory = comments.get(i);
 
             if (itemHistory.getMoodIndex() != -1) {
-
+                child = getLayoutInflater().inflate(R.layout.history_cell, layout, false);
                 TextView date;
                 ImageView comment;
                 date = (child.findViewById(R.id.date));
@@ -116,8 +116,8 @@ public class HistoryActivity extends AppCompatActivity {
                         }
                     });
                 }
+                layout.addView(child);
             }
-            layout.addView(child);
         }
     }
 }
