@@ -106,7 +106,7 @@ public class HistoryActivity extends AppCompatActivity {
                 child.setBackgroundColor(cellParameters.get(itemHistory.getMoodIndex()).first);
                 child.setLayoutParams(new RelativeLayout.LayoutParams(cellParameters.get(itemHistory.getMoodIndex()).second, metrics.heightPixels / 7));
 
-                if (itemHistory.getComment() != "" || itemHistory.getComment() != "current comment") {
+                if (!itemHistory.getComment().equalsIgnoreCase( "") && !itemHistory.getComment().equalsIgnoreCase( "Current Comment")) {
                     final String msg = itemHistory.getComment();
                     comment.setVisibility(VISIBLE);
                     comment.setOnClickListener(new View.OnClickListener() {
